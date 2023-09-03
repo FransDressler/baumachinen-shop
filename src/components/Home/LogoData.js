@@ -22,7 +22,7 @@ export const logoData = [
     {logo: logo6},
     {logo: logo7},
     {logo: logo8},
-    {logo: logo9},
+    // {logo: logo9},
     {logo: logo10},
     {logo: logo11},
     {logo: logo12},
