@@ -1,4 +1,6 @@
 import React from 'react';
+import {logoData} from './LogoData';
+import logo1 from '../../logos/collomix-logo.png';
 
 const Hero = () => {
     return(
@@ -7,7 +9,7 @@ const Hero = () => {
                     <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl xl:px-32">
                         <div className="grid items-center lg:grid-cols-2">
                             <div className="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
-                                <div className="block rounded-lg bg-amber-50/50 px-6 py-12 drop-shadow-lg dark:bg-[hsla(0,0%,5%,0.55)] dark:shadow-black/20 md:px-12 lg:-mr-14 backdrop-blur-[30px]">
+                                <div className="block rounded-lg bg-amber-50/50 px-6 py-12 drop-shadow-lg md:px-12 lg:-mr-14 backdrop-blur-[30px]">
                                     <h1 className="mt-2 mb-16 text-4xl font-bold tracking-tight md:text-5xl xl:text-6xl">
                                         Wir vermieten hochwertige<br /><span className="text-amber-600">Baumaschinen</span>
                                     </h1>
@@ -15,9 +17,9 @@ const Hero = () => {
                                         <button className="bg-transparent hover:bg-amber-800 text-amber-800 font-semibold hover:text-white py-2 px-4 border border-amber-800 hover:border-transparent rounded">
                                             <a href="/Produkte">Produkte</a>
                                         </button>
-                                        {/* <button className="bg-transparent hover:bg-amber-800 text-amber-800 font-semibold hover:text-white py-2 px-4 rounded">
-                                            <a href="">Standort</a>
-                                        </button> */}
+                                        <button className="bg-transparent hover:bg-amber-800 text-amber-800 font-semibold hover:text-white py-2 px-4 rounded">
+                                            <a href="/Standort">Standort</a>
+                                        </button>
                                         <button className="bg-transparent hover:bg-amber-800 text-amber-800 font-semibold hover:text-white py-2 px-4 rounded">
                                             <a href="/Kontakt">Kontakt</a>
                                         </button>
@@ -25,8 +27,8 @@ const Hero = () => {
                                 </div>
                             </div>
                             <div className="md:mb-12 lg:mb-0 drop-shadow-lg">
-                                <img src="https://plus.unsplash.com/premium_photo-1677707057044-65a4e662ae27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-                                    className="rounded-lg shadow-lg dark:shadow-black/20 lg:w-5/6" alt="" />
+                                <img src="https://images.unsplash.com/photo-1605910347035-59a2b94f2061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2809&q=80"
+                                    className="rounded-lg shadow-lg lg:w-5/6" alt="" />
                             </div>
                         </div>
                     </div>
@@ -101,7 +103,23 @@ const ServiceCard = ({ icon, title, details }) => {
     );
 };
 
-const Products = () => {
+class Products extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            products: [],
+        }
+    }
+    componentDidMount() {
+        fetch('https://baumaschinen-shop-api-47cd6e358646.herokuapp.com/topproducts', {
+          method: 'get',
+          headers: {'Content-Type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(products => this.setState({products: products}))
+        .catch(err => console.log('Error fetching products:', err));
+    }
+    render() {
     return(
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 flex flex-col align-center">
@@ -117,43 +135,34 @@ const Products = () => {
                     </button>
                 </div>
                 <div className="flex justify-center gap-7 flex-wrap w-full">
-                    <ProductCard
-                        title={'Bagger'}
-                        source={'https://images.unsplash.com/photo-1590834367872-3297c46273ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80'}
-                        price={'50'}
-                    />
-                    <ProductCard
-                        title={'Säge'}
-                        source={'https://images.unsplash.com/photo-1559295759-389f1c534a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'}
-                        price={'20'}
-                    />
-                    <ProductCard
-                        title={'Bagger'}
-                        source={'https://images.unsplash.com/photo-1590834367872-3297c46273ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80'}
-                        price={'50'}
-                    />
-                    <ProductCard
-                        title={'Säge'}
-                        source={'https://images.unsplash.com/photo-1559295759-389f1c534a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'}
-                        price={'20'}
-                    />
+                        {this.state.products.map((product, index) => {
+                            return(
+                            <ProductCard
+                            key={index}
+                            title={product.title}
+                            source={product.source}
+                            price={product.rentingprice}
+                            id={product.id}
+                        />
+                        )
+                        })}
                 </div>
             </div>
         </div>
-    )
+    )}
 }
 
-const ProductCard = ({title,source,price}) => {
+const ProductCard = ({title,source,price,id}) => {
     return (
     <>
       <div className="group relative w-60">
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 drop-shadow-lg">
-          <a href="/Produkt"><img src={source} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full drop-shadow-lg"/></a>
+        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md grid place-items-center lg:aspect-none group-hover:opacity-75 lg:h-80 drop-shadow-lg">
+          <a href={"/produkt?id=" + id}><img src={source} alt="" className=" w-full object-contain object-center lg:w-full drop-shadow-lg"/></a>
         </div>
         <div className="mt-4 flex justify-between">
           <div>
             <h3 className="text-sm text-gray-700">
-              <a href="/Produkt">
+              <a href={"/produkt?id=" + id}>
                 <span aria-hidden="true" className="absolute inset-0"></span>
                 {title}
               </a>
@@ -166,16 +175,54 @@ const ProductCard = ({title,source,price}) => {
     )
 }
 
-
-
-function Home() {
+const Partners = () => {
     return (
-        <div>
-            <Hero/>
-            <Service/>
-            <Products/>
+        <div className="bg-white">
+        <div className="mx-auto w-screen px-4 py-16 sm:px-6 sm:py-24 lg:px-8 flex flex-col align-cente max-w-[100rem]">
+            <div className="mx-auto mb-12 text-center lg:mb-20">
+                <span className="block mb-2 text-lg font-semibold text-primary">
+                    Hier finden Sie
+                </span>
+                <h2 className="mb-4 text-3xl capitalize font-bold text-amber-600 sm:text-4xl md:text-[40px]">
+                    Unsere Partner
+                </h2>
+                <div className="flex justify-center gap-20 md:gap-10 lg:gap-8 flex-wrap w-full mt-10">
+                        {logoData.map((logo, index) => {
+                            return(
+                            <LogoCard
+                            key={index}
+                            source={logo.logo}
+                        />
+                        )})}
+                </div>
+            </div>
         </div>
-    );
+        </div>
+    )
+}
+
+const LogoCard = ({source}) => {
+    return (
+    <>
+      <div className="group grid place-items-center  w-60">
+        <img src={source} alt="" className="h-full object-contain object-center lg:h-20"/>
+    </div>
+    </>
+    )
+}
+
+class Home extends React.Component {
+    
+    render() {
+        return (
+            <div>
+                <Hero/>
+                <Service/>
+                <Products/>
+                <Partners/>
+            </div>
+        );
+}
 }
 
 export default Home;

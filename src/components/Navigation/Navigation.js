@@ -18,16 +18,16 @@ function Navbar() {
                     <a href="/Produkte" className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-50 mr-4 font-medium font-mono">
                         Produkte
                     </a>
-                    {/* <a href="/Standort" className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-50 mr-4 font-medium font-mono">
+                    <a href="/Standort" className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-50 mr-4 font-medium font-mono">
                         Standort
-                    </a> */}
+                    </a>
                     <a href="/Kontakt" className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-50 mr-4 font-medium font-mono">
                         Kontakt
                     </a>
                 </div>
             </div>
         </nav>
-    );
+    ); 
 }
 
 export default Navbar;

@@ -2,25 +2,31 @@ import React from 'react';
 
 function Location() {
   return (
-        <section>
-        <span className="absolute -z-10 m-auto block w-full">
-        </span>
-        
-          <div className="w-100 mx-auto px-6 sm:max-w-2xl md:max-w-3xl md:px-12 lg:max-w-5xl xl:max-w-7xl xl:px-32">
-        <div className="text-center">
-          <div
-            className="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,15%,0.8)] dark:shadow-black/20 md:py-16 md:px-12">
-            <h1 className="mt-6 mb-16 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
-              The best offer on the market <br /><span className="text-primary">for your business</span>
-            </h1>
-            <a className="mb-2 inline-block rounded bg-primary px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] md:mr-2 md:mb-0"
-              data-te-ripple-init data-te-ripple-color="light" href="#!" role="button">Get started</a>
-            <a className="inline-block rounded px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:hover:bg-neutral-700 dark:hover:bg-opacity-40"
-              data-te-ripple-init data-te-ripple-color="light" href="#!" role="button">Learn more</a>
-          </div>
+    <section>
+        <div className="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center sm:pt-0 pt-20">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18851.701350139898!2d12.190566160504563!3d53.79905048194751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ac3ff2f56d1307%3A0x8c51f235c8bb32ae!2sBaumaschinen%20und%20Ger%C3%A4te%20GmbH!5e0!3m2!1sen!2sde!4v1693235606476!5m2!1sen!2sde" className="w-screen h-screen md:pt-[5em] lg:pt-[4em]" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-          </div>
-        </section>
+        <div className="p-6 mr-2 sm:hidden absolute top-0 bg-amber-800/70 rounded-lg backdrop-blur-sm drop-shadow-lg z-10 md:top-[6.2em] lg:top-[6em] md:right-3 lg:right-4 hidden md:block">
+            <h1 className="text-4xl sm:text-5xl text-gray-100  font-extrabold tracking-tight  ">
+                Standort
+            </h1>
+            <div className="flex items-center mt-8 text-gray-50 ">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" className="w-8 h-8 text-gray-200">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <div className="ml-4 text-md tracking-wide font-semibold w-full text-3xl">
+                Glasewitzer Chaussee 17 <br/>
+                18273 Güstrow
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
   );
 }
 
