@@ -25,7 +25,7 @@ class SignIn
       .then(response => {if (response) {
         this.props.changeSignIn(true)
       }})
-    }
+    };
 
     render() {
       return (
