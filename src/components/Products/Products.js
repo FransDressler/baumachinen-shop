@@ -5,8 +5,10 @@ class Products extends React.Component {
         super();
         this.state = {
             products: [],
+            searchTerm: ''
         }
     }
+
     componentDidMount() {
         fetch('https://baumaschinen-shop-api-47cd6e358646.herokuapp.com/products', {
           method: 'get',
@@ -16,39 +18,53 @@ class Products extends React.Component {
         .then(products => this.setState({products: products}))
         .catch(err => console.log('Error fetching products:', err));
     }
-    
-    
+
+    handleSearch = (e) => {
+        this.setState({searchTerm: e.target.value});
+    }
+
     render() {
+        const filteredProducts = this.state.products.filter(product => {
+            return (
+                product.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+                product.rentingprice.toString().includes(this.state.searchTerm)
+            );
+        });
+
       return (
         <section className='bg-gray-100'>
-          <div className="container pt-[7em] pb-20">
-            <div className="flex flex-wrap -mx-4">
-                <div className="w-full px-4">
-                    <div className="mx-auto mb-12 max-w-[510px] text-center lg:mb-20">
-                        <span className="block mb-2 text-lg font-semibold text-primary">
-                            Unsere Produkte
-                        </span>
-                        <h2 className="mb-4 text-3xl capitalize font-bold text-amber-600 sm:text-4xl md:text-[40px]">
-                            Was wir anbieten
-                        </h2>
-                        <p className="text-base text-body-color">
-                            Hier finden Sie alle Produkte der Baumaschinen & Geräte GmbH Dressler.
-                        </p>
-                    </div>
-                    <div className="flex justify-center gap-7 flex-wrap w-full">
-                        {this.state.products.map((product, index) => {
-                            return(
-                            <ProductCard
-                            key={index}
-                            id={product.id}
-                            title={product.title}
-                            source={product.source}
-                            price={product.rentingprice}
-                        />
-                        )
-                        })}
-                    </div>
-                </div>
+          <div className="container pt-[7em] pb-20 grid place-items-center">
+            <div className="max-w-[510px] text-center">
+                <span className="block mb-2 text-lg font-semibold text-primary">
+                    Unsere Produkte
+                </span>
+                <h2 className="mb-4 text-3xl capitalize font-bold text-amber-600 sm:text-4xl md:text-[40px]">
+                    Was wir anbieten
+                </h2>
+                <p className="text-base text-body-color">
+                    Hier finden Sie alle Produkte der Baumaschinen & Geräte GmbH Dressler.
+                </p>
+            </div>
+            <input 
+                type="text" 
+                placeholder="Suche nach Produkten oder Preisen" 
+                onChange={this.handleSearch} 
+                value={this.state.searchTerm}
+                className="p-3 rounded-md"
+            />
+            
+            <div className="flex justify-center gap-7 flex-wrap w-full">
+                {filteredProducts.map((product, index) => {
+                    return(
+                    <ProductCard
+                    key={index}
+                    id={product.id}
+                    title={product.title}
+                    source={product.source}
+                    price={product.rentingprice}
+                />
+                )
+                })}
             </div>
           </div>
           </section>
